@@ -1,9 +1,11 @@
 package com.analyze.controller;
 
-import com.analyze.entity.Url;
+import com.analyze.domain.Url;
 import com.analyze.repository.UrlRepository;
+import com.analyze.service.PageConsuption;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -21,6 +23,16 @@ public class UrlController {
     @GetMapping("/urls")
     List<Url> all() {
         return urlRepository.findAll();
+    }
+
+    @GetMapping("/go")
+    public void go() throws IOException {
+        //String url = "https://allegro.pl/kategoria/seria-5-f10-2009-2017-87995?stan=u%C5%BCywane&rodzaj-paliwa=Diesel&nadwozie=Kombi&order=m";
+        String url = "https://allegro.pl/kategoria/przyczepy-naczepy-przyczepy-18530?stan=u%C5%BCywane&marka=Elddis&typ=kempingowa&order=m";
+        System.out.println("DDDUUUPPPAAAA");
+        PageConsuption pageConsuption = new PageConsuption();
+        pageConsuption.loadDocument(url);
+        System.out.println("DDDUUUPPPAAAA222222222");
     }
 
     @PostMapping("/urls")
